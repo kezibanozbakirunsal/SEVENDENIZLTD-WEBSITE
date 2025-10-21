@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sevendeniz Limited — Joinery & Mounting Services</title>
+  <meta name="description" content="Sevendeniz Limited offers professional TV mounting, furniture assembly, custom kitchens, ready-made kitchen installation, workshop fit-outs, and home wood decoration. Construction Engineer led. Call to book." />
+  <meta name="author" content="Sevendeniz Limited" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    /* =============== Base Styles =============== */
+    :root{
+      --bg: #0f172a;          /* slate-900 */
+      --panel: #111827;       /* gray-900 */
+      --muted: #94a3b8;       /* slate-400 */
+      --text: #e5e7eb;        /* gray-200 */
+      --brand: #f59e0b;       /* amber-500 */
+      --brand-2: #22c55e;     /* green-500 */
+      --accent: #38bdf8;      /* sky-400 */
+      --card: #0b1220;        /* deeper panel */
+      --ring: rgba(245,158,11,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 600px at 70% -10%, rgba(56,189,248,.12), transparent 60%),
+                  radial-gradient(800px 400px at 0% 10%, rgba(34,197,94,.10), transparent 60%),
+                  var(--bg);
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1200px, 92vw); margin:0 auto}
+    .btn{display:inline-block;padding:.9rem 1.2rem;border-radius:14px;font-weight:700;border:1px solid transparent}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),#fcd34d);color:#1f2937;box-shadow:0 10px 30px rgba(245,158,11,.25)}
+    .btn.ghost{border-color:rgba(148,163,184,.4);color:var(--text);background:rgba(255,255,255,.02)}
+    .btn:hover{transform:translateY(-1px)}
+    .badge{display:inline-flex;gap:.5rem;align-items:center;padding:.35rem .7rem;border-radius:999px;background:rgba(56,189,248,.12);color:#e0f2fe;border:1px solid rgba(56,189,248,.25);font-size:.85rem}
+
+    /* =============== Header =============== */
+    header{position:sticky;top:0;backdrop-filter:blur(12px);background:rgba(2,6,23,.6);border-bottom:1px solid rgba(148,163,184,.15);z-index:50}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 0}
+    .brand{display:flex;align-items:center;gap:.8rem}
+    .logo{width:40px;height:40px;border-radius:10px;background:conic-gradient(from 120deg,var(--brand),#fde68a,var(--accent),#34d399);border:1px solid rgba(255,255,255,.15);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+    .brand h1{font-size:1.1rem;margin:0}
+    .menu{display:flex;gap:1rem;align-items:center}
+    .menu a{padding:.6rem .8rem;border-radius:10px;color:var(--muted)}
+    .menu a:hover{background:rgba(255,255,255,.05);color:#fff}
+    .mobile-toggle{display:none}
+
+    /* =============== Hero =============== */
+    .hero{padding:6rem 0 4rem}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center}
+    .hero h2{font-size:clamp(2rem, 1.6rem + 2.2vw, 3.2rem);line-height:1.15;margin:.5rem 0}
+    .hero p{color:var(--muted);font-size:1.05rem}
+    .pill{display:inline-flex;gap:.6rem;align-items:center;padding:.4rem .8rem;border:1px solid rgba(245,158,11,.4);border-radius:999px;background:rgba(245,158,11,.1);color:#fff;font-weight:600}
+    .cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.2rem}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid rgba(148,163,184,.18);border-radius:18px;padding:1rem}
+    .hero-media{position:relative}
+    .hero-media .frame{position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(148,163,184,.18);box-shadow:0 30px 60px rgba(0,0,0,.35);padding-bottom:.4rem}
+    /* CAPTION FIX: overlay yerine resmin altına temiz yazı */
+    .hero-media .caption{
+      position:static;                 /* artık absolute değil */
+      margin: .35rem .75rem 0 .75rem;  /* resimden sonra küçük boşluk */
+      background:none;                  /* kutu yok */
+      border:none;                      /* kenarlık yok */
+      color:var(--muted);
+      font-size:.95rem;
+      line-height:1.35;
+      text-align:center;                /* ortalı ve düzenli */
+    }
+
+    /* =============== Services =============== */
+    section{padding:4rem 0}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+    .card{background:var(--card);border:1px solid rgba(148,163,184,.14);border-radius:16px;overflow:hidden}
+    .card .body{padding:1.1rem}
+    .card h3{margin:.2rem 0 .4rem;font-size:1.1rem}
+    .chip{display:inline-block;font-size:.8rem;background:rgba(255,255,255,.04);border:1px solid rgba(148,163,184,.18);padding:.25rem .5rem;border-radius:999px;margin-right:.4rem;margin-top:.4rem}
+
+    /* =============== About =============== */
+    .about{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    .about .panel{background:var(--card);border:1px solid rgba(148,163,184,.14);border-radius:18px;padding:1.2rem}
+
+    /* =============== Gallery =============== */
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
+    .gallery img{aspect-ratio:4/3; object-fit:cover; border-radius:12px; transition:transform .3s}
+    .gallery img:hover{transform:scale(1.03)}
+    .gallery .ph{background:linear-gradient(135deg, rgba(56,189,248,.18), rgba(34,197,94,.18));aspect-ratio:4/3;border-radius:12px;border:1px dashed rgba(148,163,184,.35);display:grid;place-items:center;color:#cbd5e1;font-size:.95rem}
+
+    /* =============== Contact =============== */
+    .contact-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:1.2rem}
+    .contact-card{background:var(--card);border:1px solid rgba(148,163,184,.14);border-radius:16px;padding:1rem}
+    .info-list{display:grid;gap:.3rem;margin:0;padding:0;list-style:none}
+    .info-list li{display:flex;gap:.6rem;align-items:center}
+    .map{border:0;width:100%;height:320px;border-radius:12px;filter:grayscale(10%)}
+
+    /* =============== Footer =============== */
+    footer{border-top:1px solid rgba(148,163,184,.15);padding:2rem 0;color:var(--muted)}
+
+    /* =============== Responsive =============== */
+    @media (max-width: 960px){
+      .hero-grid, .about, .contact-grid{grid-template-columns:1fr}
+      .cards{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 640px){
+      .menu{display:none}
+      .mobile-toggle{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(148,163,184,.25);padding:.5rem .7rem;border-radius:10px}
+      .cards{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+    }
+  </style>
+</head>
+<body>
+  <!-- =============== Header / Nav =============== -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>Sevendeniz Limited</h1>
+      </div>
+      <nav class="menu" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="mobile-toggle" href="#contact" aria-label="Skip to contact">Contact</a>
+    </div>
+  </header>
+
+  <!-- =============== Hero =============== -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="pill">Construction Engineer led • Reliable • Insured</span>
+        <h2>Joinery & Mounting Experts — TV, Kitchens, Furniture, Wood Decoration</h2>
+        <p class="hero-card">From precise TV mounting and furniture assembly to bespoke kitchen design, ready-made kitchen installation, workshop fit-outs, and home wood decoration — Sevendeniz Ltd delivers quality craftsmanship with engineering precision.</p>
+        <div class="cta">
+          <a class="btn primary" href="tel:+447884110661">Call Now</a>
+          <a class="btn ghost" href="https://wa.me/447884110661" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn ghost" href="#services">View Services</a>
+        </div>
+        <p style="color:var(--muted);margin-top:.6rem">Service area: Greater Manchester & North West • Mon–Sat 08:00–19:00</p>
+      </div>
+      <div class="hero-media">
+        <div class="frame">
+          <img src="https://images.unsplash.com/photo-1576765974028-7f19b839c3ac?q=80&w=1400&auto=format&fit=crop" alt="Carpenter measuring and cutting wood" />
+          <!-- CAPTION artık resmin altına, temiz -->
+          <div class="caption">Quality joinery • Clean installs • Safe mounts</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== Services =============== -->
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="badge">Our Services</div>
+          <h2 style="margin:.4rem 0 0">Everything you need — done right</h2>
+        </div>
+        <a class="btn ghost" href="#contact">Get a Free Quote</a>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="body">
+            <h3>TV Mounting</h3>
+            <p>Secure, perfectly level TV mounting on any wall type. Cable concealment available.</p>
+            <span class="chip">Stud/brick/partition</span><span class="chip">Soundbar</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="body">
+            <h3>Furniture Assembly</h3>
+            <p>Flat-pack to custom pieces — fast and tidy assembly with all fixings checked.</p>
+            <span class="chip">IKEA/Wayfair</span><span class="chip">Wardrobes</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="body">
+            <h3>Bespoke Kitchens (Design & Build)</h3>
+            <p>Design, manufacture, and installation of custom kitchens tailored to your space.</p>
+            <span class="chip">CAD layout</span><span class="chip">Install</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="body">
+            <h3>Ready-Made Kitchen Installation</h3>
+            <p>Professional installation of pre-made kitchen units with accurate leveling.</p>
+            <span class="chip">Flat-pack</span><span class="chip">Worktops</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="body">
+            <h3>Workshop / Factory Fit-out</h3>
+            <p>End-to-end setup for small production spaces and joinery workshops.</p>
+            <span class="chip">Benches</span><span class="chip">Storage</span>
+          </div>
+        </article>
+        <article class="card">
+          <div class="body">
+            <h3>Home Wood Decoration</h3>
+            <p>Wall panels, shelves, doors, skirting, and bespoke wooden interior details.</p>
+            <span class="chip">Bespoke</span><span class="chip">Finishing</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== About =============== -->
+  <section id="about">
+    <div class="container about">
+      <div class="panel">
+        <div class="badge">About Sevendeniz Limited</div>
+        <h2 style="margin:.5rem 0 0">Engineering precision. Craftsmanship results.</h2>
+        <p>Led by Mustafa Halil, a qualified Construction Engineer, Sevendeniz Limited combines structural know-how with fine joinery skills. We focus on safe installations, accurate measurements, and clean finishes. Fully insured and punctual on every job.</p>
+        <ul class="info-list" style="margin-top:.6rem">
+          <li>✅ Professional advice before install</li>
+          <li>✅ Transparent pricing and timelines</li>
+          <li>✅ Respect for your home and workspace</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Why clients choose us</h3>
+        <p>We plan thoroughly, measure twice, and install once — ensuring durability and safety. Whether it’s a single TV bracket or a full kitchen fit, you’ll get the same attention to detail.</p>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem">
+          <span class="chip">Construction Engineer</span>
+          <span class="chip">Fully Insured</span>
+          <span class="chip">Clean & Tidy</span>
+          <span class="chip">On Time</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== Gallery =============== -->
+  <section id="gallery">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="badge">Gallery</div>
+          <h2 style="margin:.4rem 0 0">Recent projects</h2>
+        </div>
+        <a class="btn ghost" href="#contact">Book a visit</a>
+      </div>
+     <div class="gallery">
+       <img src="images/tv.jpg" alt="TV mounting installation" loading="lazy" />
+       <img src="images/furniture.jpg" alt="Furniture assembly" loading="lazy" />
+       <img src="images/Conservatory.jpg" alt="Kitchen design and installation" loading="lazy" />
+       <img src="images/wood.jpg" alt="Wood wall panels and decoration" loading="lazy" />
+     </div>
+    </div>
+  </section>
+
+  <!-- =============== Contact =============== -->
+  <section id="contact">
+    <div class="container contact-grid">
+      <div class="contact-card">
+        <div class="badge">Contact</div>
+        <h2 style="margin:.4rem 0 0">Call to book an appointment</h2>
+        <p>Fast booking by phone or WhatsApp. Share photos of your space for an accurate quote.</p>
+        <ul class="info-list" style="margin: .8rem 0 1rem">
+          <li>📞 <a href="tel:+447884110661">+44 7884 110661</a></li>
+          <li>💬 <a href="https://wa.me/447884110661" target="_blank" rel="noopener">WhatsApp chat</a></li>
+          <li>✉️ <a href="mailto:sevendenizuk@gmail.com">sevendenizuk@gmail.com</a></li>
+          <li>📍 Greater Manchester, UK</li>
+          <li>🕒 Mon–Sat 08:00–22:00</li>
+        </ul>
+        <div class="cta">
+          <a class="btn primary" href="tel:+447884110661">Call Now</a>
+          <a class="btn ghost" target="_blank" rel="noopener" href="mailto:sevendenizuk@gmail.com?subject=Quote%20request&body=Hello%20Sevendeniz%20Ltd%2C%0A%0AMy%20project%3A%20(TV%20mounting%2C%20kitchen%2C%20furniture%2C%20wood%20decoration...)%0ALocation%3A%0AIdeal%20date%3A%0A%0AThanks!">Email a quote</a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <iframe class="map" loading="lazy" allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9491.631922404939!2d-2.242631!3d53.480759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487bb1bd1f2d2b7f%3A0xeadc0f4a1b0c1a9!2sManchester%20City%20Centre!5e0!3m2!1sen!2suk!4v1700000000000">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+      <div>© <span id="year"></span> Sevendeniz Limited All rights reserved.</div>
+      <div style="display:flex;gap:.8rem;flex-wrap:wrap">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =============== Structured Data =============== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Sevendeniz Limited",
+    "description": "TV mounting, furniture assembly, bespoke kitchens, ready-made kitchen installation, workshop fit-out, home wood decoration.",
+    "areaServed": "Greater Manchester",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Manchester",
+      "addressCountry": "UK"
+    },
+    "telephone": "+447884110661",
+    "email": "sevendenizuk@gmail.com",
+    "openingHours": ["Mo-Sa 08:00-22:00"],
+    "url": "https://sevendeniz.co.uk"
+  }
+  </script>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
