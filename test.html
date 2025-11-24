@@ -1,6 +1,40 @@
 <!doctype html>
 <html lang="en">
+<head>
   <meta charset="utf-8" />
-  <title>Live Server Test</title>
-  <h1>It works 🎉</h1>
-  <p>If you see this, Live Server is OK.</p>
+  <title>Live Server Test — Sevendeniz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;padding:2rem;background:#0f172a;color:#e5e7eb}
+    .wrap{max-width:720px;margin:0 auto}
+    h1{margin:0 0 .5rem} p{color:#94a3b8}
+    .row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+    .btn{display:inline-block;padding:.7rem 1rem;border-radius:12px;border:1px solid rgba(148,163,184,.35);background:rgba(255,255,255,.03);color:#e5e7eb;text-decoration:none}
+    .btn.primary{background:#fcd34d;color:#111827;border-color:transparent;font-weight:700}
+    .ok{color:#22c55e}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>It works 🎉</h1>
+    <p>If you see this page reload automatically, Live Server is OK.</p>
+
+    <h2 style="margin-top:2rem">Quick actions</h2>
+    <div class="row">
+      <a class="btn primary" href="tel:+447884110661">Call Sevendeniz</a>
+      <a class="btn" href="https://wa.me/447884110661" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn" href="#" id="test-directions">Test Directions</a>
+      <a class="btn" href="index.html">Go to Home</a>
+    </div>
+
+    <p class="ok" style="margin-top:1rem">Tip: Use your phone to test deep links (Apple/Google Maps).</p>
+  </div>
+
+  <script>
+    const DEST={lat:53.480759,lng:-2.242631,name:"Sevendeniz Ltd"};
+    function linksFor(d){const e=encodeURIComponent(d.name);return{
+      apple:`http://maps.apple.com/?daddr=${d.lat},${d.lng}&q=${e}`,
+      gnav:`google.navigation:q=${d.lat},${d.lng}`,
+      gmapsUniversal:`https://maps.google.com/?daddr=${d.lat},${d.lng}`,
+      googleWeb:`https://www.google.com/maps/dir/?api=1&destination=${d.lat},${d.lng}&travelmode=driving`}}
+    const ua=n
