@@ -33,6 +33,7 @@
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden; /* MOBILE FIX: prevent sideways scroll */
         }
 
         body {
@@ -40,6 +41,13 @@
             color: var(--text-color);
             background-color: var(--bg-color);
             line-height: 1.6;
+            padding-top: 90px; /* MOBILE FIX: fixed header overlap */
+            overflow-x: hidden; /* MOBILE FIX: prevent sideways scroll */
+        }
+
+        /* MOBILE FIX: anchor links (Home/About/Gallery...) shouldn't hide under fixed header */
+        section {
+            scroll-margin-top: 110px;
         }
 
         h1, h2, h3 {
@@ -100,7 +108,9 @@
 
         /* --- HERO --- */
         .hero {
-            height: 100vh;
+            height: 100vh;              /* fallback */
+            min-height: 100svh;         /* MOBILE FIX: correct viewport height on mobile */
+            height: auto;               /* MOBILE FIX */
             background:
               linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
               url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop')
@@ -110,7 +120,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 20px;
+            padding: 110px 20px 40px;   /* MOBILE FIX: keep content visible under fixed header */
         }
 
         .hero h1 {
@@ -423,7 +433,7 @@
             .hero h1 {
                 font-size: 2.5rem;
             }
-            
+
             header {
                 flex-direction: column;
                 padding: 15px;
@@ -433,14 +443,19 @@
                 margin-bottom: 10px;
             }
 
-            nav ul {git pull --rebase origin main
-
+            nav ul {
                 gap: 15px;
                 font-size: 0.8rem;
+                flex-wrap: wrap;          /* MOBILE FIX: menu wrap */
+                justify-content: center;  /* MOBILE FIX: center on mobile */
             }
 
             .feedback-grid {
                 grid-template-columns: 1fr;
+            }
+
+            body {
+                padding-top: 110px; /* MOBILE FIX: more space when header becomes taller */
             }
         }
     </style>
@@ -449,7 +464,7 @@
 
     <!-- NAV -->
     <header>
-        <div class="logo">SEVENDENIZ COMPANY</div>
+        <div class="logo">SEVENDENIZ LIMITED</div>
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
@@ -464,7 +479,7 @@
 
     <!-- HERO -->
     <section id="home" class="hero">
-        <h1>SEVENDENIZ COMPANY</h1>
+        <h1>SEVENDENIZ LIMITED</h1>
         <p>Wardrobes, kitchens, TV units and bespoke furniture — carefully installed and finished to bring a calm, modern look to your home.</p>
         <a href="#contact" class="btn">Get a Free Quote</a>
     </section>
@@ -472,10 +487,10 @@
     <!-- ABOUT -->
     <section id="about" class="about">
         <div class="section-title">
-            <h2>About SEVENDENIZ COMPANY</h2>
+            <h2>About SEVENDENIZ LIMITED</h2>
         </div>
         <div class="about-content">
-            <p>SEVENDENIZ COMPANY is a Manchester-based interior design service specialising in fitted wardrobes, bespoke TV units, kitchen cabinets and careful mounting work. Every project is treated as a one-off: we measure, plan and install with great attention to detail, so that every millimetre works for your space.</p>
+            <p>SEVENDENIZ LIMITED is a Manchester-based interior design service specialising in fitted wardrobes, bespoke TV units, kitchen cabinets and careful mounting work. Every project is treated as a one-off: we measure, plan and install with great attention to detail, so that every millimetre works for your space.</p>
             <p>From small flats to full family homes, we focus on clean lines, soft colours and practical storage. Our goal is to make your rooms feel lighter, calmer and more organised — without losing your personal style.</p>
 
             <div class="about-highlights">
@@ -501,7 +516,7 @@
             <h2>Our Gallery</h2>
             <p>A small selection of recent work. More photos are available on request and new projects are added regularly.</p>
         </div>
-        
+
         <!-- Kitchen -->
         <h3 class="gallery-subtitle">Kitchen Cabinets & Design</h3>
         <div class="gallery-grid">
@@ -534,7 +549,7 @@
             </div>
         </div>
         <p class="gallery-caption">
-            Bespoke furniture and storage units designed to fit perfectly into each space, from living rooms 
+            Bespoke furniture and storage units designed to fit perfectly into each space, from living rooms
             to hallways and home offices.
         </p>
 
@@ -558,7 +573,7 @@
             Professional assembly of IKEA and flat-pack furniture, including wardrobes, drawers, TV units and shelving,
             installed safely and level so you can use everything straight away.
         </p>
-        
+
         <!-- Wardrobes / Dressing Rooms -->
         <h3 class="gallery-subtitle">Wardrobes & Dressing Rooms</h3>
         <div class="gallery-grid">
@@ -667,7 +682,7 @@
     <section id="feedback" class="about">
         <div class="section-title">
             <h2>Customer Satisfaction</h2>
-            <p>We value your feedback. Please let us know how your experience with SEVENDENIZ COMPANY was.</p>
+            <p>We value your feedback. Please let us know how your experience with SEVENDENIZ LIMITED was.</p>
         </div>
         <div class="feedback-wrapper">
             <form action="mailto:info@sevendenizdesign.com" method="POST" enctype="text/plain">
@@ -728,7 +743,7 @@
             <div class="contact-info">
                 <div class="contact-item">
                     <h4>Address</h4>
-                    <p>SEVENDENIZ COMPANY<br>Manchester City Centre, M4 4EF<br>United Kingdom</p>
+                    <p>SEVENDENIZ LIMITED<br>Manchester City Centre, M4 4EF<br>United Kingdom</p>
                 </div>
                 <div class="contact-item">
                     <h4>Phone / WhatsApp</h4>
@@ -740,7 +755,7 @@
                 </div>
                 <div class="contact-item">
                     <h4>Email</h4>
-                    <p>info@sevendenizdesign.com</p>
+                    <p>info@sevendenizuk@gmail.com</p>
                 </div>
                 <div class="contact-item">
                     <h4>Working Hours</h4>
@@ -767,7 +782,7 @@
 
     <!-- FOOTER -->
     <footer>
-        <p>&copy; 2025 SEVENDENIZ COMPANY. All Rights Reserved.</p>
+        <p>&copy; 2025 SEVENDENIZ LIMITED. All Rights Reserved.</p>
     </footer>
 
 </body>
