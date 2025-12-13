@@ -252,6 +252,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.4s ease;
+            cursor: zoom-in; /* LIGHTBOX */
         }
 
         .gallery-item:hover {
@@ -426,6 +427,43 @@
         footer p {
             font-size: 0.9rem;
             opacity: 0.8;
+        }
+
+        /* --- LIGHTBOX (click to enlarge) --- */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 9999;
+        }
+
+        .lightbox.open {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: min(1100px, 95vw);
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            font-size: 34px;
+            line-height: 1;
+            color: #fff;
+            cursor: pointer;
+            user-select: none;
+            padding: 8px 12px;
         }
 
         /* --- RESPONSIVE --- */
@@ -784,6 +822,48 @@
     <footer>
         <p>&copy; 2025 SEVENDENIZ LIMITED. All Rights Reserved.</p>
     </footer>
+
+    <!-- LIGHTBOX MODAL -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <div class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</div>
+        <img id="lightboxImg" alt="">
+    </div>
+
+    <script>
+        // Lightbox: open images in fullscreen on click
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        function openLightbox(src, alt) {
+            lightboxImg.src = src;
+            lightboxImg.alt = alt || 'Image';
+            lightbox.classList.add('open');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden'; // prevent background scroll on mobile
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            lightboxImg.src = '';
+            document.body.style.overflow = '';
+        }
+
+        // Click any gallery image to open
+        document.querySelectorAll('.gallery-item img').forEach(img => {
+            img.addEventListener('click', () => openLightbox(img.getAttribute('src'), img.getAttribute('alt')));
+        });
+
+        // Close actions
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target === lightboxClose) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
 
 </body>
 </html>
