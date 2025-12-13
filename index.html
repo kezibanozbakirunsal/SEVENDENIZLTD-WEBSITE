@@ -466,6 +466,48 @@
             padding: 8px 12px;
         }
 
+        /* --- LIGHTBOX ARROWS --- */
+        .lightbox-btn {
+            position: absolute;
+            border: 0;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            background: rgba(255,255,255,0.14);
+            color: #fff;
+            font-size: 44px;
+            line-height: 1;
+            width: 52px;
+            height: 52px;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            backdrop-filter: blur(8px);
+            transition: transform .12s ease, background .12s ease;
+        }
+
+        .lightbox-btn:hover {
+            background: rgba(255,255,255,0.22);
+            transform: scale(1.03);
+        }
+
+        .lightbox-prev {
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .lightbox-next {
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        @media (max-width: 600px) {
+            .lightbox-prev { left: 10px; }
+            .lightbox-next { right: 10px; }
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .hero h1 {
@@ -826,21 +868,50 @@
     <!-- LIGHTBOX MODAL -->
     <div class="lightbox" id="lightbox" aria-hidden="true">
         <div class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</div>
+
+        <button class="lightbox-btn lightbox-prev" id="lightboxPrev" aria-label="Previous image">‹</button>
         <img id="lightboxImg" alt="">
+        <button class="lightbox-btn lightbox-next" id="lightboxNext" aria-label="Next image">›</button>
     </div>
 
     <script>
-        // Lightbox: open images in fullscreen on click
+        // Lightbox: open images in fullscreen on click + prev/next arrows
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
         const lightboxClose = document.getElementById('lightboxClose');
+        const lightboxPrev = document.getElementById('lightboxPrev');
+        const lightboxNext = document.getElementById('lightboxNext');
+
+        const galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
+        let currentIndex = -1;
+
+        function openLightboxByIndex(index) {
+            if (!galleryImages.length) return;
+
+            currentIndex = (index + galleryImages.length) % galleryImages.length;
+
+            const img = galleryImages[currentIndex];
+            const src = img.getAttribute('src');
+            const alt = img.getAttribute('alt') || 'Image';
+
+            lightboxImg.src = src;
+            lightboxImg.alt = alt;
+            lightbox.classList.add('open');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden'; // prevent background scroll on mobile
+        }
 
         function openLightbox(src, alt) {
+            // Keep for compatibility; but also set currentIndex if we can find it
+            const foundIndex = galleryImages.findIndex(i => i.getAttribute('src') === src);
+            if (foundIndex !== -1) return openLightboxByIndex(foundIndex);
+
             lightboxImg.src = src;
             lightboxImg.alt = alt || 'Image';
             lightbox.classList.add('open');
             lightbox.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden'; // prevent background scroll on mobile
+            document.body.style.overflow = 'hidden';
+            currentIndex = -1;
         }
 
         function closeLightbox() {
@@ -848,20 +919,40 @@
             lightbox.setAttribute('aria-hidden', 'true');
             lightboxImg.src = '';
             document.body.style.overflow = '';
+            currentIndex = -1;
+        }
+
+        function nextImage() {
+            if (currentIndex === -1) return;
+            openLightboxByIndex(currentIndex + 1);
+        }
+
+        function prevImage() {
+            if (currentIndex === -1) return;
+            openLightboxByIndex(currentIndex - 1);
         }
 
         // Click any gallery image to open
-        document.querySelectorAll('.gallery-item img').forEach(img => {
-            img.addEventListener('click', () => openLightbox(img.getAttribute('src'), img.getAttribute('alt')));
+        galleryImages.forEach((img, idx) => {
+            img.addEventListener('click', () => openLightboxByIndex(idx));
         });
 
-        // Close actions
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox || e.target === lightboxClose) closeLightbox();
-        });
+        // Prevent overlay click when pressing buttons
+        lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+        lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+        lightboxClose.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+        lightboxImg.addEventListener('click', (e) => e.stopPropagation());
 
+        // Click outside image closes
+        lightbox.addEventListener('click', () => closeLightbox());
+
+        // Keyboard
         document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('open')) return;
+
             if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') prevImage();
         });
     </script>
 
